@@ -23,6 +23,7 @@ public class pickUpStuff : MonoBehaviour
             if (currentObject)
             {
                 currentObject.useGravity = true;
+                gameObject.GetComponent<Animator>().enabled = false; // should pause the animation when an object is picked up by player
                 currentObject = null;
                 return;
             }
@@ -32,6 +33,7 @@ public class pickUpStuff : MonoBehaviour
             {
                 currentObject = HitInfo.rigidbody;
                 currentObject.useGravity = false;
+                gameObject.GetComponent<Animator>().enabled = true; // should start the animation when SPACE is pressed again to put down an object
             }
         }
     }
@@ -43,7 +45,7 @@ public class pickUpStuff : MonoBehaviour
             Vector3 directionToPoint = holdpos.position - currentObject.position;
             float distanceToPoint = directionToPoint.magnitude;
 
-            currentObject.velocity = directionToPoint * 25f * distanceToPoint;
+            currentObject.velocity = directionToPoint * 50f * distanceToPoint;
         }
     }
 }
